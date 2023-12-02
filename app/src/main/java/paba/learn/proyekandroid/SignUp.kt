@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import paba.learn.proyekandroid.data.AppDatabase
 import paba.learn.proyekandroid.data.entity.Users
 
@@ -33,25 +36,26 @@ class SignUp : AppCompatActivity() {
         _btnCreateAcc = findViewById(R.id.btnCreateAcc)
         _btnLogin = findViewById(R.id.tvLogin)
 
-        database = AppDatabase.getInstance(applicationContext)
+        database = AppDatabase.getDatabase(this)
 
         _btnCreateAcc.setOnClickListener {
             if (_fullName.text.isNotEmpty() && _email.text.isNotEmpty() && _phoneNumber.text.isNotEmpty() && _address.text.isNotEmpty() && _password.text.isNotEmpty() && _reinputPassword.text.isNotEmpty()) {
                 if (_password.text.toString().equals(_reinputPassword.text.toString())){
-                    database.userDao().insertAll(
-                        Users(
-                            null,
-                            _fullName.text.toString(),
-                            _email.text.toString(),
-                            _phoneNumber.text.toString(),
-                            _address.text.toString(),
-                            _password.text.toString(),
-                            0
+                    CoroutineScope(Dispatchers.IO).async {
+                        database.userDao().insert(
+                            Users(
+                                null,
+                                _fullName.text.toString(),
+                                _email.text.toString(),
+                                _phoneNumber.text.toString(),
+                                _address.text.toString(),
+                                _password.text.toString(),
+                                0
+                            )
                         )
-                    )
+                    }
                     Toast.makeText(applicationContext, "Berhasil membuat akun", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@SignUp, MainActivity::class.java)
-//                    val intent = Intent(this@SignUp, DisplayAllUser::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(applicationContext, "Password tidak sesuai", Toast.LENGTH_SHORT).show()

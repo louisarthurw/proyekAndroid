@@ -12,16 +12,20 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     companion object {
+        @Volatile
         private var instance: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
+        @JvmStatic
+        fun getDatabase(context: Context): AppDatabase {
             if (instance == null) {
-                instance = Room.databaseBuilder(context, AppDatabase::class.java, "app-database")
-                    .fallbackToDestructiveMigration()
-                    .allowMainThreadQueries()
-                    .build()
+                synchronized(AppDatabase::class.java){
+                    instance = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "app-database")
+                        .fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
+                        .build()
+                }
             }
-            return instance!!
+            return instance as AppDatabase
         }
     }
 }

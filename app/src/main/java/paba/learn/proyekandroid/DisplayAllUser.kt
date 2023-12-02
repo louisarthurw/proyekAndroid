@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import paba.learn.proyekandroid.adapter.UserAdapter
 import paba.learn.proyekandroid.data.AppDatabase
 import paba.learn.proyekandroid.data.entity.Users
@@ -26,12 +30,11 @@ class DisplayAllUser : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.rvUsers)
 
-        database = AppDatabase.getInstance(applicationContext)
+        database = AppDatabase.getDatabase(this)
         adapterUsers = UserAdapter(listUsers)
 
         recyclerView.adapter = adapterUsers
-        recyclerView.layoutManager = LinearLayoutManager(applicationContext, VERTICAL, false)
-        recyclerView.addItemDecoration(DividerItemDecoration(applicationContext, VERTICAL))
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         _btnBack.setOnClickListener {
             val intent = Intent(this@DisplayAllUser, MainActivity::class.java)
@@ -39,15 +42,23 @@ class DisplayAllUser : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        getData()
+    override fun onStart() {
+        super.onStart()
+        CoroutineScope(Dispatchers.IO).async {
+            val user = database.userDao().selectAll()
+            adapterUsers.isiData(user)
+        }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun getData() {
-        listUsers.clear()
-        listUsers.addAll(database.userDao().getAll())
-        adapterUsers.notifyDataSetChanged()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        getData()
+//    }
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun getData() {
+//        listUsers.clear()
+//        listUsers.addAll(database.userDao().getAll())
+//        adapterUsers.notifyDataSetChanged()
+//    }
 }
