@@ -1,10 +1,18 @@
 package paba.learn.proyekandroid
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import paba.learn.proyekandroid.data.AppDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +28,7 @@ class fragmentProfile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var database: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +44,55 @@ class fragmentProfile : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var _btnChangePassword = view.findViewById<Button>(R.id.btnChangePassword)
+        var _btnSwitchAdmin = view.findViewById<Button>(R.id.btnSwitchAdmin)
+        var _btnDeleteAcc = view.findViewById<Button>(R.id.btnDeleteAcc)
+        var _tvAkun = view.findViewById<TextView>(R.id.tvAkun)
+        database = AppDatabase.getDatabase(requireContext())
+
+        val id = arguments?.getString("id").toString()
+        var userLogin = database.userDao().getUser(id.toInt())
+        _tvAkun.text = "Akun " + userLogin.fullName
+        Log.d("user di profile", userLogin.toString())
+
+        _btnChangePassword.setOnClickListener {
+            val intent = Intent(requireContext(), ChangePassword::class.java).apply {
+                putExtra(ChangePassword.idUser, id)
+            }
+            startActivity(intent)
+        }
+
+        _btnDeleteAcc.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("HAPUS AKUN")
+                .setMessage("APAKAH BENAR AKUN AKAN DIHAPUS?")
+                .setNegativeButton(
+                    "TIDAK",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        Toast.makeText(
+                            requireContext(),
+                            "HAPUS AKUN DIBATALKAN",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    })
+                .setPositiveButton(
+                    "YA",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        database.userDao().deleteUser(id.toInt())
+                        Toast.makeText(
+                            requireContext(),
+                            "AKUN BERHASIL DIHAPUS",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                    })
+                .show()
+        }
     }
 
     companion object {

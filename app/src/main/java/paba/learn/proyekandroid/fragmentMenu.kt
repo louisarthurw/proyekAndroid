@@ -1,10 +1,13 @@
 package paba.learn.proyekandroid
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import paba.learn.proyekandroid.data.AppDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +23,7 @@ class fragmentMenu : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var database: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,17 @@ class fragmentMenu : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_menu, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        database = AppDatabase.getDatabase(requireContext())
+
+        if (arguments != null) {
+            val id = arguments?.getString("id").toString()
+            var userLogin = database.userDao().getUser(id.toInt())
+            Log.d("user di menu", userLogin.toString())
+        }
     }
 
     companion object {

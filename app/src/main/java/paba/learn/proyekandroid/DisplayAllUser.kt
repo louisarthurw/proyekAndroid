@@ -1,18 +1,14 @@
 package paba.learn.proyekandroid
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 import paba.learn.proyekandroid.adapter.UserAdapter
 import paba.learn.proyekandroid.data.AppDatabase
 import paba.learn.proyekandroid.data.entity.Users

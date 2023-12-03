@@ -7,10 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
 import paba.learn.proyekandroid.data.AppDatabase
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +33,9 @@ class MainActivity : AppCompatActivity() {
             if (_etEmailLogin.text.toString() != "" && _etPasswordLogin.text.toString() != "") {
                 if (_cekEmailValid != null) {
                     if (_cekLogin != null) {
-                        val intent = Intent(this@MainActivity, Menu::class.java)
+                        val intent = Intent(this@MainActivity, Menu::class.java).apply {
+                            putExtra(Menu.idLogin, _cekLogin.uid.toString())
+                        }
                         startActivity(intent)
                         _tvFeedback.text = ""
                     } else {
