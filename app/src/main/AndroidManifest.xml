@@ -13,6 +13,18 @@
         android:theme="@style/Theme.ProyekAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".AddEditMenu"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditDeleteMenu"
+            android:exported="false" />
+        <activity
+            android:name=".MainAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".SwitchAdmin"
+            android:exported="false" />
+        <activity
             android:name=".ChangePassword"
             android:exported="false" />
         <activity

@@ -66,6 +66,13 @@ class fragmentProfile : Fragment() {
             startActivity(intent)
         }
 
+        _btnSwitchAdmin.setOnClickListener {
+            val intent = Intent(requireContext(), SwitchAdmin::class.java).apply {
+                putExtra(SwitchAdmin.idUser, id)
+            }
+            startActivity(intent)
+        }
+
         _btnDeleteAcc.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("HAPUS AKUN")
