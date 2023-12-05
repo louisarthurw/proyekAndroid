@@ -8,55 +8,152 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnChangePassword"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnTopup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="8dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:id="@+id/tvAkun"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="PROFILE"
-            android:textSize="40sp" />
-    </FrameLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Nama"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/namaUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Louis Arthur Widya"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:text="Email"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/emailUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="louis.arthur2003@gmail.com"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:text="Alamat"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/alamatUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Simpang DPU IX / 1"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+
+            android:text="No Telp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/noTelpUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="083856569199"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:text="Saldo"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/saldoUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Rp100.000,00"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTopup"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="Top Up"
+        app:layout_constraintBottom_toTopOf="@+id/btnChangePassword"
+        app:layout_constraintEnd_toEndOf="@+id/btnChangePassword"
+        app:layout_constraintStart_toStartOf="@+id/btnChangePassword" />
 
     <Button
         android:id="@+id/btnChangePassword"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/black"
         android:text="Change Password"
         app:layout_constraintBottom_toTopOf="@+id/btnSwitchAdmin"
         app:layout_constraintEnd_toEndOf="@+id/btnSwitchAdmin"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnSwitchAdmin" />
 
     <Button
         android:id="@+id/btnSwitchAdmin"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/blue"
         android:text="Switch to Admin"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="@+id/btnLogout" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:text="Log Out"
         app:layout_constraintBottom_toTopOf="@+id/btnDeleteAcc"
         app:layout_constraintEnd_toEndOf="@+id/btnDeleteAcc"
         app:layout_constraintStart_toStartOf="@+id/btnDeleteAcc" />
 
     <Button
         android:id="@+id/btnDeleteAcc"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
         android:text="Delete Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -123,7 +123,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Gambar Menu"
+        android:text="Nama Gambar Menu"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,8 +153,9 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/baseline_person_24"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/textInput15"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/textInput15"
         app:layout_constraintTop_toBottomOf="@+id/textInput15" />
 
@@ -180,6 +181,20 @@
         android:padding="16dp"
         android:layout_marginTop="8dp"
         android:text="Edit Menu"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textInput15"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textInput15"
+        app:layout_constraintTop_toBottomOf="@+id/ivDisplayGambarMenu" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/black"
+        android:padding="16dp"
+        android:text="Back"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textInput15"
         app:layout_constraintHorizontal_bias="0.0"

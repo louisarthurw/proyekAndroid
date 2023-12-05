@@ -1,6 +1,10 @@
 package paba.learn.proyekandroid.adapter
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +13,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import paba.learn.proyekandroid.AddEditMenu
+import paba.learn.proyekandroid.DetailMenu
+import paba.learn.proyekandroid.MainAdmin
+import paba.learn.proyekandroid.Menu
 import paba.learn.proyekandroid.R
 import paba.learn.proyekandroid.data.entity.Menus
+import java.io.IOException
+import java.text.NumberFormat
+import java.util.Locale
 
-class adapterMenu(private val listMenu: MutableList<Menus>) :
+class adapterMenu(private val listMenu: MutableList<Menus>, private val idUser: String) :
     RecyclerView.Adapter<adapterMenu.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
+    private lateinit var context: Context
 
     interface OnItemClickCallback {
         fun delData(dtmenu: Menus)
@@ -34,7 +45,6 @@ class adapterMenu(private val listMenu: MutableList<Menus>) :
         var _ivGambarMenu: ImageView = itemView.findViewById(R.id.ivGambarMenu)
         var _tvNamaMenu: TextView = itemView.findViewById(R.id.tvNamaMenu)
         var _tvHargaMenu: TextView = itemView.findViewById(R.id.tvHargaMenu)
-        var _tvDeskripsiMenu: TextView = itemView.findViewById(R.id.tvDeskripsiMenu)
 
         var _btnEdit: ImageButton = itemView.findViewById(R.id.btnEdit)
         var _btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
@@ -43,6 +53,7 @@ class adapterMenu(private val listMenu: MutableList<Menus>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View =
             LayoutInflater.from(parent.context).inflate(R.layout.row_menu, parent, false)
+        context = parent.context
         return ListViewHolder(view)
     }
 
@@ -52,9 +63,22 @@ class adapterMenu(private val listMenu: MutableList<Menus>) :
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         var menu = listMenu[position]
+        val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+        val hargaMenu = formatter.format(menu.hargaMenu)
+
+        if (isFileInFolder(context, menu.gambarMenu.toString())) {
+            val bitmap: Bitmap? = showImage(context, menu.gambarMenu.toString())
+            bitmap?.let {
+                holder._ivGambarMenu.setImageBitmap(bitmap)
+            }
+        } else {
+            val bitmap: Bitmap? = showImage(context, "defaultimage.png")
+            bitmap?.let {
+                holder._ivGambarMenu.setImageBitmap(bitmap)
+            }
+        }
         holder._tvNamaMenu.setText(menu.namaMenu)
-        holder._tvHargaMenu.setText(menu.hargaMenu.toString())
-        holder._tvDeskripsiMenu.setText(menu.deskripsiMenu)
+        holder._tvHargaMenu.setText(hargaMenu.toString())
 
         holder._btnEdit.setOnClickListener {
             val intent = Intent(it.context, AddEditMenu::class.java)
@@ -65,6 +89,33 @@ class adapterMenu(private val listMenu: MutableList<Menus>) :
 
         holder._btnDelete.setOnClickListener {
             onItemClickCallback.delData(menu)
+        }
+
+        holder._ivGambarMenu.setOnClickListener {
+            val intent = Intent(it.context, DetailMenu::class.java)
+            intent.putExtra("idUser", idUser)
+            intent.putExtra("idMenu", menu.idMenu)
+            it.context.startActivity(intent)
+        }
+    }
+
+    fun isFileInFolder(context: Context, file: String): Boolean {
+        return try {
+            val inputStream = context.assets.open(file)
+            inputStream.close()
+            true
+        } catch (e: IOException) {
+            false
+        }
+    }
+
+    private fun showImage(context: Context, file: String): Bitmap? {
+        return try {
+            val inputStream = context.assets?.open(file)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: Exception){
+            e.printStackTrace()
+            null
         }
     }
 }

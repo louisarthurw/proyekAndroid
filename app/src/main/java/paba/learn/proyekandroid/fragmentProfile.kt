@@ -13,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import paba.learn.proyekandroid.data.AppDatabase
+import java.text.NumberFormat
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,16 +50,31 @@ class fragmentProfile : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var _namaUser = view.findViewById<TextView>(R.id.namaUser)
+        var _emailUser = view.findViewById<TextView>(R.id.emailUser)
+        var _alamatUser = view.findViewById<TextView>(R.id.alamatUser)
+        var _noTelpUser = view.findViewById<TextView>(R.id.noTelpUser)
+        var _saldoUser = view.findViewById<TextView>(R.id.saldoUser)
+
+        var _btnTopup = view.findViewById<Button>(R.id.btnTopup)
         var _btnChangePassword = view.findViewById<Button>(R.id.btnChangePassword)
         var _btnSwitchAdmin = view.findViewById<Button>(R.id.btnSwitchAdmin)
+        var _btnLogout = view.findViewById<Button>(R.id.btnLogout)
         var _btnDeleteAcc = view.findViewById<Button>(R.id.btnDeleteAcc)
-        var _tvAkun = view.findViewById<TextView>(R.id.tvAkun)
+
         database = AppDatabase.getDatabase(requireContext())
 
         val id = arguments?.getString("id").toString()
         var userLogin = database.userDao().getUser(id.toInt())
-        _tvAkun.text = "Akun " + userLogin.fullName
-        Log.d("user di profile", userLogin.toString())
+
+        val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+        val saldo = formatter.format(userLogin.balance)
+
+        _namaUser.text = userLogin.fullName
+        _emailUser.text = userLogin.email
+        _alamatUser.text = userLogin.address
+        _noTelpUser.text = userLogin.phoneNumber
+        _saldoUser.text = saldo.toString()
 
         _btnChangePassword.setOnClickListener {
             val intent = Intent(requireContext(), ChangePassword::class.java).apply {
@@ -70,6 +87,11 @@ class fragmentProfile : Fragment() {
             val intent = Intent(requireContext(), SwitchAdmin::class.java).apply {
                 putExtra(SwitchAdmin.idUser, id)
             }
+            startActivity(intent)
+        }
+
+        _btnLogout.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
         }
 

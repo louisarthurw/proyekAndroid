@@ -25,13 +25,13 @@ class MainAdmin : AppCompatActivity() {
         setContentView(R.layout.activity_main_admin)
 
         database = MenuDatabase.getDatabase(this)
-        adapterM = adapterMenu(arMenu)
 
-        var id_user = intent.getStringExtra(ChangePassword.idUser).toString()
+        var id_user = intent.getStringExtra(idUser).toString()
         val _rvMenus = findViewById<RecyclerView>(R.id.rvMenus)
         val _btnLogoutAdmin = findViewById<ImageView>(R.id.ivLogoutAdmin)
         val _fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
+        adapterM = adapterMenu(arMenu, id_user)
         _rvMenus.layoutManager = LinearLayoutManager(this)
         _rvMenus.adapter = adapterM
 
@@ -43,7 +43,10 @@ class MainAdmin : AppCompatActivity() {
         }
 
         _fabAdd.setOnClickListener {
-            startActivity(Intent(this, AddEditMenu::class.java))
+            val intent = Intent(this@MainAdmin, AddEditMenu::class.java).apply {
+                putExtra(AddEditMenu.idUser, id_user)
+            }
+            startActivity(intent)
         }
 
         adapterM.setOnItemClickCallback(object : adapterMenu.OnItemClickCallback {

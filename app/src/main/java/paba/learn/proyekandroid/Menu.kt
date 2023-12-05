@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -16,6 +17,7 @@ class Menu : AppCompatActivity() {
         var idLogin = intent.getStringExtra(idLogin)
 
         var _header: TextView = findViewById(R.id.textViewHeader)
+        var _cart: ImageView = findViewById(R.id.btnCart)
         var _navbarHome: ImageView = findViewById(R.id.navbarHome)
         var _navbarMenu: ImageView = findViewById(R.id.navbarMenu)
         var _navbarProfile: ImageView = findViewById(R.id.navbarProfile)
@@ -33,6 +35,7 @@ class Menu : AppCompatActivity() {
 
         _navbarHome.setOnClickListener {
             _header.text = "HOME"
+            _cart.visibility = View.VISIBLE
 
             mBundle.putString("id", idLogin)
             mfragmentHome.arguments = mBundle
@@ -46,6 +49,7 @@ class Menu : AppCompatActivity() {
 
         _navbarMenu.setOnClickListener {
             _header.text = "MENU"
+            _cart.visibility = View.VISIBLE
 
             mBundle.putString("id", idLogin)
             mfragmentMenu.arguments = mBundle
@@ -59,6 +63,7 @@ class Menu : AppCompatActivity() {
 
         _navbarProfile.setOnClickListener {
             _header.text = "PROFILE"
+            _cart.visibility = View.GONE
 
             mBundle.putString("id", idLogin)
             mfragmentProfile.arguments = mBundle

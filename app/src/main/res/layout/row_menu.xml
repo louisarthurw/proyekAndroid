@@ -12,7 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/baseline_person_24"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,54 +20,45 @@
 
     <TextView
         android:id="@+id/tvNamaMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Nama Menu"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivGambarMenu"
-        app:layout_constraintTop_toTopOf="@+id/ivGambarMenu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvHargaMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:text="Rp XX.XXX"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvNamaMenu"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvNamaMenu"
         app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu" />
-
-    <TextView
-        android:id="@+id/tvDeskripsiMenu"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Ini adalah deskripsi dari menu disamping."
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivGambarMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvHargaMenu"
-        app:layout_constraintTop_toBottomOf="@+id/tvHargaMenu" />
 
     <ImageButton
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:src="@drawable/baseline_edit_24"
-        app:layout_constraintBottom_toBottomOf="@+id/btnDelete"
-        app:layout_constraintEnd_toStartOf="@+id/btnDelete" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvHargaMenu" />
 
     <ImageButton
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:src="@drawable/baseline_delete_24"
-        app:layout_constraintBottom_toTopOf="@+id/tvDeskripsiMenu"
-        app:layout_constraintEnd_toEndOf="@+id/tvDeskripsiMenu" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
+        app:layout_constraintStart_toEndOf="@+id/btnEdit" />
+    " />
 </androidx.constraintlayout.widget.ConstraintLayout>
