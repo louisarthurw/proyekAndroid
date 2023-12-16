@@ -56,10 +56,11 @@ class DetailMenu : AppCompatActivity() {
         _tvDetailDeskripsiMenu.text = menu.deskripsiMenu.toString()
 
         _btnBack.setOnClickListener {
-            val intent = Intent(this@DetailMenu, MainAdmin::class.java).apply {
-                putExtra(MainAdmin.idUser, id_user)
-            }
-            startActivity(intent)
+//            val intent = Intent(this@DetailMenu, MainAdmin::class.java).apply {
+//                putExtra(MainAdmin.idUser, id_user)
+//            }
+//            startActivity(intent)
+            finish()
         }
     }
 

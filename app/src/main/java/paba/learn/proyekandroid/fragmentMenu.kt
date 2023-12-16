@@ -7,7 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import paba.learn.proyekandroid.adapter.adapterMenu
+import paba.learn.proyekandroid.adapter.adapterMenuUser
 import paba.learn.proyekandroid.data.AppDatabase
+import paba.learn.proyekandroid.data.MenuDatabase
+import paba.learn.proyekandroid.data.entity.Menus
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +30,10 @@ class fragmentMenu : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var database: AppDatabase
+    private lateinit var database_menu: MenuDatabase
+    private lateinit var adapterMU: adapterMenuUser
+    private val arMenuUser: MutableList<Menus> = mutableListOf()
+    private lateinit var id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,12 +54,28 @@ class fragmentMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         database = AppDatabase.getDatabase(requireContext())
+        database_menu = MenuDatabase.getDatabase(requireContext())
 
         if (arguments != null) {
-            val id = arguments?.getString("id").toString()
+            id = arguments?.getString("id").toString()
             var userLogin = database.userDao().getUser(id.toInt())
             Log.d("user di menu", userLogin.toString())
         }
+
+        val _rvMenus = view.findViewById<RecyclerView>(R.id.rvMenuUser)
+        adapterMU = adapterMenuUser(arMenuUser, id)
+        _rvMenus.layoutManager = LinearLayoutManager(requireContext())
+        _rvMenus.adapter = adapterMU
+
+        adapterMU.setOnItemClickCallback(object : adapterMenuUser.OnItemClickCallback {
+
+        })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val menu = database_menu.menuDao().selectAll()
+        adapterMU.isiData(menu)
     }
 
     companion object {

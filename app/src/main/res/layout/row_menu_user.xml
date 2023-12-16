@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/ivGambarMenu"
+        android:id="@+id/ivGambarMenu2"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
@@ -19,7 +18,7 @@
         app:layout_constraintVertical_bias="0.333" />
 
     <TextView
-        android:id="@+id/tvNamaMenu"
+        android:id="@+id/tvNamaMenu2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -29,11 +28,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivGambarMenu"
+        app:layout_constraintStart_toEndOf="@+id/ivGambarMenu2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvHargaMenu"
+        android:id="@+id/tvHargaMenu2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -41,23 +40,17 @@
         android:text="Rp XX.XXX"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaMenu"
-        app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu" />
+        app:layout_constraintStart_toStartOf="@+id/tvNamaMenu2"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu2" />
 
     <ImageButton
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnAddMenuToCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:src="@drawable/baseline_edit_24"
+        android:src="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvHargaMenu" />
+        app:layout_constraintStart_toStartOf="@+id/tvHargaMenu2" />
 
-    <ImageButton
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_delete_24"
-        app:layout_constraintBottom_toBottomOf="@+id/btnEdit"
-        app:layout_constraintStart_toEndOf="@+id/btnEdit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
