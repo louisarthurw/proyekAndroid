@@ -22,6 +22,7 @@ class SwitchAdmin : AppCompatActivity() {
                 if (_etPasswordAdmin.text.toString() != "admin") {
                     _tvFeedbackAdmin.text = "Password salah!"
                 } else {
+                    _etPasswordAdmin.setText("")
                     val intent = Intent(this@SwitchAdmin, MainAdmin::class.java).apply {
                         putExtra(MainAdmin.idUser, id)
                     }

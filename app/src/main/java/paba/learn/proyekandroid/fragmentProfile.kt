@@ -92,6 +92,7 @@ class fragmentProfile : Fragment() {
 
         _btnLogout.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
+            requireActivity().finish()
             startActivity(intent)
         }
 

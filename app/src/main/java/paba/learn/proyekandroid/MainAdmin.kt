@@ -40,6 +40,7 @@ class MainAdmin : AppCompatActivity() {
                 putExtra(Menu.idLogin, id_user)
             }
             startActivity(intent)
+            this.finish()
         }
 
         _fabAdd.setOnClickListener {
