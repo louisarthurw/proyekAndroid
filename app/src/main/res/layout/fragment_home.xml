@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragmentHome">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tvNama"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="HOME"
-        android:gravity="center"
-        android:textSize="40sp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Hi, [nama user]..."
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to TLRFood"
+        android:textSize="28sp"
+        android:textStyle="italic"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:text="     TLRfood is a food application created by 3 friends. TLR itself is an abbreviation from the 3 friends themselves, namely Timotius, Louis and Ryan. The name idea for TLRfood first emerged because these 3 friends didn't know a name for their application. So they use their name as the name of their restaurant"
+        android:justificationMode="inter_word"
+        android:textSize="18sp"></TextView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="20dp"
+        android:text="     TLR restaurant provides a variety of foods with a Chinese food theme. All food in our restaurant is cooked using high quality ingredients.  Some of TLRFood signature dishes are Nasi Goreng, Mie Goreng, Nasi Kuning, Bakso, Nasi Cap Cay and many more"
+        android:justificationMode="inter_word"
+        android:textSize="18sp"></TextView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/nasgorhongkong"></ImageView>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/nasicapcay"></ImageView>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/miegoreg"></ImageView>
+
+    </LinearLayout>
+</LinearLayout>
