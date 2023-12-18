@@ -74,6 +74,13 @@ class Menu : AppCompatActivity() {
                 commit()
             }
         }
+
+        _cart.setOnClickListener{
+            val intent = Intent(this@Menu, DisplayCart::class.java).apply {
+                putExtra(DisplayCart.idUser, idLogin)
+            }
+            startActivity(intent)
+        }
     }
 
     companion object {
