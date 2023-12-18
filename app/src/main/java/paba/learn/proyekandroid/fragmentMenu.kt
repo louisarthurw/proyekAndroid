@@ -13,6 +13,7 @@ import paba.learn.proyekandroid.adapter.adapterMenu
 import paba.learn.proyekandroid.adapter.adapterMenuUser
 import paba.learn.proyekandroid.data.AppDatabase
 import paba.learn.proyekandroid.data.MenuDatabase
+import paba.learn.proyekandroid.data.entity.Cart
 import paba.learn.proyekandroid.data.entity.Menus
 
 // TODO: Rename parameter arguments, choose names that match
@@ -59,7 +60,6 @@ class fragmentMenu : Fragment() {
         if (arguments != null) {
             id = arguments?.getString("id").toString()
             var userLogin = database.userDao().getUser(id.toInt())
-            Log.d("user di menu", userLogin.toString())
         }
 
         val _rvMenus = view.findViewById<RecyclerView>(R.id.rvMenuUser)

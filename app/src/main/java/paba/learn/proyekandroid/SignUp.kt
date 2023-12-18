@@ -39,29 +39,44 @@ class SignUp : AppCompatActivity() {
         database = AppDatabase.getDatabase(this)
 
         _btnCreateAcc.setOnClickListener {
+            var isUserRegistered = database.userDao().cekEmailValid(_email.text.toString())
             if (_fullName.text.isNotEmpty() && _email.text.isNotEmpty() && _phoneNumber.text.isNotEmpty() && _address.text.isNotEmpty() && _password.text.isNotEmpty() && _reinputPassword.text.isNotEmpty()) {
-                if (_password.text.toString().equals(_reinputPassword.text.toString())){
-                    CoroutineScope(Dispatchers.IO).async {
-                        database.userDao().insert(
-                            Users(
-                                null,
-                                _fullName.text.toString(),
-                                _email.text.toString(),
-                                _phoneNumber.text.toString(),
-                                _address.text.toString(),
-                                _password.text.toString(),
-                                0
+                if (_password.text.toString().equals(_reinputPassword.text.toString())) {
+                    if (isUserRegistered != null) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Akun dengan email " + _email.text.toString() + " sudah terdaftar!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        CoroutineScope(Dispatchers.IO).async {
+                            database.userDao().insert(
+                                Users(
+                                    null,
+                                    _fullName.text.toString(),
+                                    _email.text.toString(),
+                                    _phoneNumber.text.toString(),
+                                    _address.text.toString(),
+                                    _password.text.toString(),
+                                    0
+                                )
                             )
-                        )
+                        }
+                        Toast.makeText(
+                            applicationContext,
+                            "Berhasil membuat akun",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this@SignUp, MainActivity::class.java)
+                        startActivity(intent)
                     }
-                    Toast.makeText(applicationContext, "Berhasil membuat akun", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@SignUp, MainActivity::class.java)
-                    startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "Password tidak sesuai", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Password tidak sesuai", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
-                Toast.makeText(applicationContext, "Ada field yang belum diisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Ada field yang belum diisi", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }

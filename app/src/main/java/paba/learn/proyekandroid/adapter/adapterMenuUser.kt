@@ -12,8 +12,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import paba.learn.proyekandroid.AddEditMenu
+import paba.learn.proyekandroid.AddToCart
 import paba.learn.proyekandroid.DetailMenu
 import paba.learn.proyekandroid.R
+import paba.learn.proyekandroid.data.entity.Cart
 import paba.learn.proyekandroid.data.entity.Menus
 import java.io.IOException
 import java.text.NumberFormat
@@ -25,7 +27,6 @@ class adapterMenuUser(private val listMenu: MutableList<Menus>, private val idUs
     private lateinit var context: Context
 
     interface OnItemClickCallback {
-
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -77,12 +78,15 @@ class adapterMenuUser(private val listMenu: MutableList<Menus>, private val idUs
         holder._tvHargaMenu2.setText(hargaMenu.toString())
 
         holder._btnAddMenuToCart.setOnClickListener {
-
+            val intent = Intent(it.context, AddToCart::class.java)
+            intent.putExtra("idUser", idUser.toInt())
+            intent.putExtra("idMenu",menu.idMenu)
+            it.context.startActivity(intent)
         }
 
         holder._ivGambarMenu2.setOnClickListener {
             val intent = Intent(it.context, DetailMenu::class.java)
-            intent.putExtra("idUser", idUser)
+            intent.putExtra("idUser", idUser.toInt())
             intent.putExtra("idMenu", menu.idMenu)
             it.context.startActivity(intent)
         }
