@@ -10,6 +10,7 @@
         android:id="@+id/imageMakanan"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +67,7 @@
         android:id="@+id/floatingActionButtonMinus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="150dp"
         android:backgroundTint="@color/black"
         android:clickable="true"
         app:layout_constraintEnd_toStartOf="@+id/jumlahMenu"
@@ -78,9 +79,9 @@
         android:id="@+id/buttonAddToCart"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="ADD"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="@color/black"
+        android:text="ADD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -52,8 +52,6 @@ class fragmentProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var _namaUser = view.findViewById<TextView>(R.id.namaUser)
-        var _emailUser = view.findViewById<TextView>(R.id.emailUser)
-        var _alamatUser = view.findViewById<TextView>(R.id.alamatUser)
         var _noTelpUser = view.findViewById<TextView>(R.id.noTelpUser)
         _saldoUser = view.findViewById(R.id.saldoUser)
 
@@ -72,8 +70,6 @@ class fragmentProfile : Fragment() {
         val saldo = formatter.format(userLogin.balance)
 
         _namaUser.text = userLogin.fullName
-        _emailUser.text = userLogin.email
-        _alamatUser.text = userLogin.address
         _noTelpUser.text = userLogin.phoneNumber
         _saldoUser.text = saldo.toString()
 

@@ -62,7 +62,7 @@ class Menu : AppCompatActivity() {
         }
 
         _navbarProfile.setOnClickListener {
-            _header.text = "PROFILE"
+            _header.text = "ACCOUNT"
             _cart.visibility = View.GONE
 
             mBundle.putString("id", idLogin)
