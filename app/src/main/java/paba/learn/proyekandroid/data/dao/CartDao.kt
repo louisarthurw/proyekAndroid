@@ -22,6 +22,9 @@ interface CartDao {
     @Query("SELECT * FROM cart ORDER BY idCart ASC")
     fun selectAll(): MutableList<Cart>
 
+    @Query("SELECT * FROM cart WHERE id_user=:id_user")
+    fun getAllItem(id_user: Int): MutableList<Cart>
+
     @Query("SELECT * FROM cart WHERE id_menu=:id_menu AND id_user=:id_user")
     fun getItemID(id_menu: Int, id_user: Int): Int
 

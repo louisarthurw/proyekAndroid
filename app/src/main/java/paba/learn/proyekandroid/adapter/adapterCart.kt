@@ -80,9 +80,11 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
         holder._minButtonCart.imageTintList = ColorStateList.valueOf(color)
         var cart = listCart[position]
         var menu = database_menu.menuDao().getMenu(cart.idMenu ?: 0)
+        var totalHarga: Int
 
         val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
-        val hargaMenu = formatter.format(menu.hargaMenu)
+        val hargaMenu = menu.hargaMenu
+        val hargaMenuFormat = formatter.format(hargaMenu)
 
         if (isFileInFolder(context, menu.gambarMenu.toString())) {
             val bitmap: Bitmap? = showImage(context, menu.gambarMenu.toString())
@@ -96,7 +98,7 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
             }
         }
         holder._tvNamaMenu3.setText(menu.namaMenu)
-        holder._tvHargaMenu3.setText(hargaMenu.toString())
+        holder._tvHargaMenu3.setText(hargaMenuFormat.toString())
         holder._jumlahMenuCart.setText(cart.jumlahMenu.toString())
 
         holder._addButtonCart.setOnClickListener {
