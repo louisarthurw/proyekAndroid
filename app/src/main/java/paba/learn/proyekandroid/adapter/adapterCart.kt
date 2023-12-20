@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import paba.learn.proyekandroid.AddToCart
 import paba.learn.proyekandroid.DetailMenu
+import paba.learn.proyekandroid.DisplayCart
 import paba.learn.proyekandroid.MainActivity
 import paba.learn.proyekandroid.R
 import paba.learn.proyekandroid.data.AppDatabase
@@ -105,9 +106,10 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
             var itemID = database_cart.cartDao().getItemID(menu.idMenu ?: 0, idUser.toInt())
             var jumlahMenuDalamCart = holder._jumlahMenuCart.text.toString().toInt()
             jumlahMenuDalamCart++
-            database_cart.cartDao()
-                .update(jumlahMenuDalamCart, itemID)
+            database_cart.cartDao().update(jumlahMenuDalamCart, itemID)
             holder._jumlahMenuCart.text = jumlahMenuDalamCart.toString()
+
+            (context as? DisplayCart)?.updateTotal(idUser.toInt())
         }
 
         holder._minButtonCart.setOnClickListener {
@@ -133,6 +135,7 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
                             database_cart.cartDao().deleteItem(itemID)
                             listCart.removeAt(position)
                             notifyItemRemoved(position)
+                            (context as? DisplayCart)?.updateTotal(idUser.toInt())
                             Toast.makeText(
                                 this.context,
                                 "AKUN BERHASIL DIHAPUS",
@@ -146,6 +149,7 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
                 database_cart.cartDao()
                     .update(jumlahMenuDalamCart, itemID)
                 holder._jumlahMenuCart.text = jumlahMenuDalamCart.toString()
+                (context as? DisplayCart)?.updateTotal(idUser.toInt())
             }
         }
     }

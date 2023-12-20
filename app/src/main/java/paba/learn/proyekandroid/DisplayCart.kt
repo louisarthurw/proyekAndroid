@@ -47,11 +47,12 @@ class DisplayCart : AppCompatActivity() {
         adapterC.setOnItemClickCallback(object : adapterCart.OnItemClickCallback {
 
         })
+        totalHarga = 0
 
-        for (i in isiCart){
-            var menu = database_menu.menuDao().getMenu(i.idMenu ?: 0)
-            var harga = menu.hargaMenu
-            var jumlah = i.jumlahMenu
+        for (i in isiCart) {
+            val menu = database_menu.menuDao().getMenu(i.idMenu ?: 0)
+            val harga = menu.hargaMenu
+            val jumlah = i.jumlahMenu
             totalHarga += jumlah?.times(harga!!) ?: 0
         }
 
@@ -59,13 +60,34 @@ class DisplayCart : AppCompatActivity() {
         val hargaMenuTotal = totalHarga
         val hargaMenuTotalFormat = formatter.format(hargaMenuTotal)
 
-        _tvTotalHarga.setText(hargaMenuTotalFormat.toString())
+        _tvTotalHarga.text = hargaMenuTotalFormat.toString()
+
     }
 
     override fun onStart() {
         super.onStart()
         val cart = database_cart.cartDao().selectAll()
         adapterC.isiData(cart)
+    }
+
+    fun updateTotal(id_user: Int) {
+        totalHarga = 0
+        var _tvTotalHarga = findViewById<TextView>(R.id.totalHarga)
+
+        val isiCart = database_cart.cartDao().getAllItem(id_user)
+
+        for (i in isiCart) {
+            val menu = database_menu.menuDao().getMenu(i.idMenu ?: 0)
+            val harga = menu.hargaMenu
+            val jumlah = i.jumlahMenu
+            totalHarga += jumlah?.times(harga!!) ?: 0
+        }
+
+        val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+        val hargaMenuTotal = totalHarga
+        val hargaMenuTotalFormat = formatter.format(hargaMenuTotal)
+
+        _tvTotalHarga.text = hargaMenuTotalFormat.toString()
     }
 
     companion object {
