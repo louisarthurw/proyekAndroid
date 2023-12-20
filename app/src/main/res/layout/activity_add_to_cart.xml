@@ -16,15 +16,17 @@
 
     <TextView
         android:id="@+id/namaMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="Nama Menu"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/hargaMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageMakanan"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageMakanan" />
 
     <TextView
         android:id="@+id/hargaMenu"
@@ -33,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Harga Menu"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageMakanan" />
@@ -42,39 +44,34 @@
         android:id="@+id/jumlahMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
         android:text="0"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButtonMinus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageMakanan" />
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButtonMinus" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="221dp"
-        android:layout_marginEnd="112dp"
+        android:backgroundTint="@color/black"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/jumlahMenu"
-        app:layout_constraintTop_toBottomOf="@+id/hargaMenu"
-        android:backgroundTint="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButtonMinus"
         app:srcCompat="@drawable/baseline_add_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonMinus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="221dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="250dp"
+        android:backgroundTint="@color/black"
         android:clickable="true"
         app:layout_constraintEnd_toStartOf="@+id/jumlahMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/namaMenu"
-        android:backgroundTint="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/deskripsiMenu"
         app:srcCompat="@drawable/baseline_horizontal_rule_24" />
 
     <Button
@@ -90,11 +87,14 @@
 
     <TextView
         android:id="@+id/deskripsiMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="22dp"
+        android:layout_marginEnd="16dp"
         android:text="Deskripsi"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namaMenu" />
 

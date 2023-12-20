@@ -17,6 +17,7 @@ import paba.learn.proyekandroid.DetailMenu
 import paba.learn.proyekandroid.MainAdmin
 import paba.learn.proyekandroid.Menu
 import paba.learn.proyekandroid.R
+import paba.learn.proyekandroid.data.CartDatabase
 import paba.learn.proyekandroid.data.entity.Menus
 import java.io.IOException
 import java.text.NumberFormat
@@ -26,6 +27,7 @@ class adapterMenu(private val listMenu: MutableList<Menus>, private val idUser: 
     RecyclerView.Adapter<adapterMenu.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
     private lateinit var context: Context
+    private lateinit var database_cart: CartDatabase
 
     interface OnItemClickCallback {
         fun delData(dtmenu: Menus)
@@ -54,6 +56,7 @@ class adapterMenu(private val listMenu: MutableList<Menus>, private val idUser: 
         val view: View =
             LayoutInflater.from(parent.context).inflate(R.layout.row_menu, parent, false)
         context = parent.context
+        database_cart = CartDatabase.getDatabase(context)
         return ListViewHolder(view)
     }
 
@@ -89,6 +92,8 @@ class adapterMenu(private val listMenu: MutableList<Menus>, private val idUser: 
 
         holder._btnDelete.setOnClickListener {
             onItemClickCallback.delData(menu)
+            val id_menu = menu.idMenu
+            database_cart.cartDao().deleteMenu(id_menu ?: 0)
         }
 
         holder._ivGambarMenu.setOnClickListener {

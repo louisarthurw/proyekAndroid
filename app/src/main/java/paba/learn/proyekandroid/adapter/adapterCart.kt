@@ -125,7 +125,7 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
                         DialogInterface.OnClickListener { dialog, which ->
                             Toast.makeText(
                                 this.context,
-                                "HAPUS AKUN DIBATALKAN",
+                                "HAPUS ITEM DIBATALKAN",
                                 Toast.LENGTH_SHORT
                             ).show()
                         })
@@ -135,17 +135,17 @@ class adapterCart(private val listCart: MutableList<Cart>, private val idUser: S
                             database_cart.cartDao().deleteItem(itemID)
                             listCart.removeAt(position)
                             notifyItemRemoved(position)
+                            notifyItemRangeChanged(position, listCart.size)
                             (context as? DisplayCart)?.updateTotal(idUser.toInt())
                             Toast.makeText(
                                 this.context,
-                                "AKUN BERHASIL DIHAPUS",
+                                "ITEM BERHASIL DIHAPUS DARI CART",
                                 Toast.LENGTH_SHORT
                             ).show()
 
                         })
                     .show()
-            }
-            else {
+            } else {
                 database_cart.cartDao()
                     .update(jumlahMenuDalamCart, itemID)
                 holder._jumlahMenuCart.text = jumlahMenuDalamCart.toString()

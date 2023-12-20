@@ -34,6 +34,12 @@ interface CartDao {
     @Query("SELECT jumlah_menu FROM cart WHERE id_menu=:id_menu AND id_user=:id_user")
     fun getJumlahItem(id_menu: Int, id_user: Int): Int
 
+    @Query("DELETE FROM cart WHERE id_user=:id_user")
+    fun checkOut(id_user: Int)
+
+    @Query("DELETE FROM cart WHERE id_menu=:id_menu")
+    fun deleteMenu(id_menu: Int)
+
     @Query("DELETE FROM cart WHERE idCart=:id_cart")
     fun deleteItem(id_cart: Int)
 }

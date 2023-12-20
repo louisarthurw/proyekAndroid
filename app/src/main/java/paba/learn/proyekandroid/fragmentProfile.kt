@@ -31,6 +31,7 @@ class fragmentProfile : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var database: AppDatabase
+    private lateinit var _saldoUser: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +55,7 @@ class fragmentProfile : Fragment() {
         var _emailUser = view.findViewById<TextView>(R.id.emailUser)
         var _alamatUser = view.findViewById<TextView>(R.id.alamatUser)
         var _noTelpUser = view.findViewById<TextView>(R.id.noTelpUser)
-        var _saldoUser = view.findViewById<TextView>(R.id.saldoUser)
+        _saldoUser = view.findViewById(R.id.saldoUser)
 
         var _btnTopup = view.findViewById<Button>(R.id.btnTopup)
         var _btnChangePassword = view.findViewById<Button>(R.id.btnChangePassword)
@@ -79,6 +80,13 @@ class fragmentProfile : Fragment() {
         _btnChangePassword.setOnClickListener {
             val intent = Intent(requireContext(), ChangePassword::class.java).apply {
                 putExtra(ChangePassword.idUser, id)
+            }
+            startActivity(intent)
+        }
+
+        _btnTopup.setOnClickListener {
+            val intent = Intent(requireContext(), TopUp::class.java).apply {
+                putExtra(TopUp.idUser, id)
             }
             startActivity(intent)
         }
@@ -125,6 +133,14 @@ class fragmentProfile : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val idd = arguments?.getString("id").toString()
+        val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+        val saldo = database.userDao().getUser(idd.toInt()).balance
+        val saldoo = formatter.format((saldo))
+        _saldoUser.text = saldoo.toString()
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

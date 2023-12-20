@@ -23,20 +23,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+
         android:text="Nama Menu"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivGambarMakanan"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ivGambarMakanan" />
 
     <TextView
         android:id="@+id/hargaMenuCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Rp XX.XXX"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/namaMenuCart"
         app:layout_constraintTop_toBottomOf="@+id/namaMenuCart" />
 
@@ -44,37 +44,33 @@
         android:id="@+id/jumlahMenuCart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginStart="8dp"
         android:text="0"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonMinusCart" />
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButtonMinusCart"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonMinusCart"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButtonMinusCart" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonAddCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="@color/black"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/jumlahMenuCart"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButtonMinusCart"
         app:srcCompat="@drawable/baseline_add_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonMinusCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/black"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/jumlahMenuCart"
+        app:layout_constraintStart_toStartOf="@+id/hargaMenuCart"
+        app:layout_constraintTop_toBottomOf="@+id/hargaMenuCart"
         app:srcCompat="@drawable/baseline_horizontal_rule_24" />
 
 

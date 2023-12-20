@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ProyekAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".TopUp"
+            android:exported="false" />
+        <activity
             android:name=".DisplayCart"
             android:exported="false" />
         <activity

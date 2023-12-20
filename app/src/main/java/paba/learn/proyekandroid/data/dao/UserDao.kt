@@ -33,7 +33,6 @@ interface UserDao {
     @Query("DELETE FROM users WHERE uid=:uid")
     fun deleteUser(uid: Int)
 
-//    @Query("UPDATE users SET balance:=balance WHERE uid=:uid")
-//    fun updateBalance(balance: Int, uid: Int)
-
+    @Query("UPDATE users SET balance=:balance WHERE uid=:uid")
+    fun updateBalance(balance: Int, uid: Int)
 }

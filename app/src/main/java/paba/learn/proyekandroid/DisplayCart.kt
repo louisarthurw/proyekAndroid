@@ -1,8 +1,16 @@
 package paba.learn.proyekandroid
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
@@ -29,15 +37,17 @@ class DisplayCart : AppCompatActivity() {
         setContentView(R.layout.activity_display_cart)
 
         var _tvTotalHarga = findViewById<TextView>(R.id.totalHarga)
+        var _btnCheckout = findViewById<Button>(R.id.buttonCheckout)
 
         database = AppDatabase.getDatabase(this)
         database_menu = MenuDatabase.getDatabase(this)
         database_cart = CartDatabase.getDatabase(this)
 
         val id_user = intent.getStringExtra(idUser)
-        var user = database.userDao().getUser(id_user.toString().toInt())
 
         val isiCart = database_cart.cartDao().getAllItem(id_user.toString().toInt())
+        Log.d("id_user", id_user.toString())
+        Log.d("isi cart", isiCart.toString())
 
         val _rvCart = findViewById<RecyclerView>(R.id.rvCart)
         adapterC = adapterCart(arCart, id_user.toString())
@@ -62,11 +72,44 @@ class DisplayCart : AppCompatActivity() {
 
         _tvTotalHarga.text = hargaMenuTotalFormat.toString()
 
+        _btnCheckout.setOnClickListener {
+            val saldoUser = database.userDao().getUser(id_user.toString().toInt()).balance ?: 0
+            Log.d("saldo sebelum co", saldoUser.toString())
+            Log.d("nominal co", totalHarga.toString())
+
+            AlertDialog.Builder(this)
+                .setTitle("CHECKOUT")
+                .setMessage("APAKAH ANDA YAKIN AKAN CHECKOUT?")
+                .setNegativeButton(
+                    "TIDAK",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        Toast.makeText(
+                            this,
+                            "Batal checkout!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    })
+                .setPositiveButton(
+                    "YA",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        if (totalHarga > saldoUser) {
+                            Toast.makeText(this, "Saldo tidak cukup, silahkan top up terlebih dahulu!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val saldoSetelahCO = saldoUser - totalHarga
+                            database_cart.cartDao().checkOut(id_user.toString().toInt())
+                            database.userDao().updateBalance(saldoSetelahCO, id_user.toString().toInt())
+                            Toast.makeText(this, "Berhasil checkout!", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    })
+                .show()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        val cart = database_cart.cartDao().selectAll()
+        val id_userr = intent.getStringExtra(idUser).toString()
+        val cart = database_cart.cartDao().getAllItem(id_userr.toInt())
         adapterC.isiData(cart)
     }
 
