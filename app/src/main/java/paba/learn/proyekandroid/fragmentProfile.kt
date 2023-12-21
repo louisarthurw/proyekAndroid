@@ -53,6 +53,8 @@ class fragmentProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var _namaUser = view.findViewById<TextView>(R.id.namaUser)
         var _noTelpUser = view.findViewById<TextView>(R.id.noTelpUser)
+        var _emailUser = view.findViewById<TextView>(R.id.emailUser)
+        var _alamatUser = view.findViewById<TextView>(R.id.alamatUser)
         _saldoUser = view.findViewById(R.id.saldoUser)
 
         var _btnTopup = view.findViewById<Button>(R.id.btnTopup)
@@ -71,6 +73,8 @@ class fragmentProfile : Fragment() {
 
         _namaUser.text = userLogin.fullName
         _noTelpUser.text = userLogin.phoneNumber
+        _emailUser.text = userLogin.email
+        _alamatUser.text = userLogin.address
         _saldoUser.text = saldo.toString()
 
         _btnChangePassword.setOnClickListener {
