@@ -23,4 +23,7 @@ interface MenuDao {
 
     @Query("SELECT * FROM menus WHERE idMenu=:idMenu")
     fun getMenu(idMenu: Int): Menus
+
+    @Query("SELECT nama_menu FROM menus WHERE idMenu=:idMenu")
+    fun getNamaMenu(idMenu: Int): String?
 }

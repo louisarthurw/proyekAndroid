@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ class MainAdmin : AppCompatActivity() {
         val _rvMenus = findViewById<RecyclerView>(R.id.rvMenus)
         val _btnLogoutAdmin = findViewById<ImageView>(R.id.ivLogoutAdmin)
         val _fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
+        var _btnHistory = findViewById<ImageView>(R.id.ivHistory)
 
         adapterM = adapterMenu(arMenu, id_user)
         _rvMenus.layoutManager = LinearLayoutManager(this)
@@ -46,6 +48,13 @@ class MainAdmin : AppCompatActivity() {
         _fabAdd.setOnClickListener {
             val intent = Intent(this@MainAdmin, AddEditMenu::class.java).apply {
                 putExtra(AddEditMenu.idUser, id_user)
+            }
+            startActivity(intent)
+        }
+
+        _btnHistory.setOnClickListener {
+            val intent = Intent(this@MainAdmin, History::class.java).apply {
+                putExtra(History.idUser, id_user)
             }
             startActivity(intent)
         }

@@ -18,8 +18,10 @@ import paba.learn.proyekandroid.adapter.adapterCart
 import paba.learn.proyekandroid.adapter.adapterMenuUser
 import paba.learn.proyekandroid.data.AppDatabase
 import paba.learn.proyekandroid.data.CartDatabase
+import paba.learn.proyekandroid.data.HistoryDatabase
 import paba.learn.proyekandroid.data.MenuDatabase
 import paba.learn.proyekandroid.data.entity.Cart
+import paba.learn.proyekandroid.data.entity.History
 import paba.learn.proyekandroid.data.entity.Menus
 import java.text.NumberFormat
 import java.util.Locale
@@ -28,6 +30,7 @@ class DisplayCart : AppCompatActivity() {
     private lateinit var database: AppDatabase
     private lateinit var database_menu: MenuDatabase
     private lateinit var database_cart: CartDatabase
+    private lateinit var database_history: HistoryDatabase
     private lateinit var adapterC: adapterCart
     private val arCart: MutableList<Cart> = mutableListOf()
     var totalHarga = 0
@@ -42,6 +45,7 @@ class DisplayCart : AppCompatActivity() {
         database = AppDatabase.getDatabase(this)
         database_menu = MenuDatabase.getDatabase(this)
         database_cart = CartDatabase.getDatabase(this)
+        database_history = HistoryDatabase.getDatabase(this)
 
         val id_user = intent.getStringExtra(idUser)
 
@@ -98,6 +102,22 @@ class DisplayCart : AppCompatActivity() {
                             val saldoSetelahCO = saldoUser - totalHarga
                             database_cart.cartDao().checkOut(id_user.toString().toInt())
                             database.userDao().updateBalance(saldoSetelahCO, id_user.toString().toInt())
+
+                            for (i in isiCart) {
+                                val jumlah = i.jumlahMenu ?: 0
+                                val jumlahDipesan = database_history.historyDao().getJumlahDipesan(i.idMenu ?: 0)
+
+                                Log.d("jumlah di cart", jumlah.toString())
+                                Log.d("jumlah di database history", jumlahDipesan.toString())
+
+                                if (jumlahDipesan != null) {
+                                    var jumlahBaru = jumlahDipesan + jumlah
+                                    database_history.historyDao().update(jumlahBaru, i.idMenu ?: 0)
+                                } else {
+                                    database_history.historyDao().insert(History(i.idMenu, i.jumlahMenu))
+                                }
+                            }
+
                             Toast.makeText(this, "Berhasil checkout!", Toast.LENGTH_SHORT).show()
                             finish()
                         }
